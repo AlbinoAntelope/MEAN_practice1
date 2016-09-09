@@ -1,8 +1,10 @@
 var express = require('express');
 var app = express();
 
-var mongojs = require('mongojs');
-var db = mongojs('contactList', ['contactList']);
+var mongoose = require('mongoose');
+var mongodURI =  'mongodb://heroku_ngrs5bb0:rq4lrabeu1fjmphriqeh37c0g3@ds029106.mlab.com:29106/heroku_ngrs5bb0';
+mongoose.connect(mongodURI);
+var db = mongoose.connection;
 
 
 app.set('port', (process.env.PORT || 5000));
