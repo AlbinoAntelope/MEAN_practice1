@@ -1,0 +1,19 @@
+{
+  "name": "mean-contact-list",
+  "version": "1.0.0",
+  "description": "a contact list app",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.9.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "contact",
+    "list"
+  ],
+  "author": "Daniel Eryavec",
+  "license": "ISC"
+}
