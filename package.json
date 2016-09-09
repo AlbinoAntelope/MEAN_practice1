@@ -4,7 +4,9 @@
   "description": "a contact list app",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.9.8"
+    "express": "^4.9.8",
+    "body-parser": "^1.10.2",
+    "mongojs": "^0.18.1"
   },
   "devDependencies": {},
   "scripts": {
