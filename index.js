@@ -7,6 +7,15 @@ mongoose.connect(mongodURI);
 var db = mongoose.connection;
 
 
+var ContactSchema = mongoose.Schema({
+    name     : String,
+    email      : String,
+    number      : String
+});
+
+var contactModel = mongoose.model('Contact', ContactSchema);
+
+
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + "/public"));
@@ -15,7 +24,7 @@ app.use(express.static(__dirname + "/public"));
 app.get('/contactList', function (request, response) {
 	console.log("I received a GET request");
 
-	db.contactList.find(function (err, docs) {
+	contactModel.find({}, function (err, docs) {
 		console.log(docs);
 		response.json(docs);
 	});
