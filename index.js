@@ -25,6 +25,27 @@ app.get('/contactList', function (request, response) {
 	console.log("I received a GET request");
 
 	contactModel.find({}, function (err, docs) {
+		//console.log(docs);
+		response.json(docs);
+	});
+});
+
+//Send a single contact
+app.get('/contactList/:id', function (request, response) {
+	var id = request.params.id;
+	console.log(id);
+	contactModel.findOne({_id:id}, function (err, docs) {
+		console.log(docs);
+		response.json(docs);
+	});
+});
+
+//update a single contact
+app.put('/contactList/:id', function (request, response) {
+	var id = request.params.id;
+	contact = request.body;
+	console.log(id);
+	contactModel.update({_id:id}, {name:contact.name, email:contact.email, number:contact.number}, function (err, docs) {
 		console.log(docs);
 		response.json(docs);
 	});
@@ -35,9 +56,24 @@ app.post('/contactList', function (request, response) {
 	console.log(request.body);
 
 	var newContact = new contactModel(request.body);
-	newContact.save(function (err) {
+	newContact.save().then(function (docs) {
+		console.log("Contact saved");
+		response.json(docs);
+	}, function (err) {
 		if (err) throw err;
-	})
+	});
+	console.log("status:");
+	console.log(response.statusCode);
+});
+
+//remove Contact from Contact List
+app.delete('/contactList/:id', function (request, response) {
+	var id = request.params.id;
+	console.log(id);
+	contactModel.remove({_id:id}, function (err, docs) {
+		console.log("contact deleted")
+		response.json(docs);
+	});
 });
 
 app.listen(app.get('port'), function() {
