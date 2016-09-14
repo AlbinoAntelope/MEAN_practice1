@@ -72,4 +72,23 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.clearContact = function (id) {
 		$scope.contact = "";	
 	};
-}]);
+}]).directive('telephoneValidate', function (){
+	//custom validation for phone #
+	return {
+		require: 'ngModel',
+    		link: function(scope, elm, attrs, ctrl) {
+    			ctrl.$validators.integer = function(modelValue, viewValue) {
+    				if (ctrl.$isEmpty(modelValue)) {
+    					// consider empty models to be invalid
+    					return false;
+    				}
+    				var pattern = /^\x28\d\d\d\x29\x20\d\d\d\x2d\d\d\d\d$/;
+    				if (pattern.test(viewValue)) {
+    					return true;
+    				}
+    				// it is invalid
+    				return false;
+    			};
+    		}
+    	};
+});

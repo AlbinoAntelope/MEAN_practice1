@@ -4,26 +4,37 @@
 	<title>Contact List App</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/main.css" /> 
+	<style>
+		.css-form input.ng-invalid.ng-touched{
+			background-color: #FA787E !important;
+		}
+		.css-form input.ng-valid.ng-touched {
+			background-color: #78FA89 !important;
+		}
+	</style>
 </head>
 <body>
 	<div class = "container" ng-controller="AppCtrl">
+
 		<h1>Contact List App</h1>
 		<table class = "table" >
 			<thead>
 				<tr>
 					<th>Name</th>
 					<th>Email</th>
-					<th>Number</th>
+					<th>Number in form (###) ###-####</th>
 					<th>Action</th>
 				</tr>
 			</thead>
-			<tr>
-				<td><input class = "form-control" ng-model="contact.name" ></td>
-				<td><input class = "form-control" ng-model="contact.email" ></td>
-				<td><input class = "form-control" ng-model="contact.number" ></td>
-				<td><button class = "btn btn-primary" ng-click="addContact()" >Add Contact</button></td>
-				<td><button class = "btn btn-primary" ng-click="updateContact()" >Update</button></td>
+			<tr class = "css-form">
+				<form class = "css-form">
+					<td><input class = "form-control" type = "text" ng-model="contact.name" required></td>
+					<td><input class = "form-control" type = "email" ng-model="contact.email" required></td>
+					<td><input class = "form-control" name="number" ng-model="contact.number" required telephone-validate></td>
+					<td><button class = "btn btn-primary" ng-click="addContact()" >Add Contact</button></td>
+					<td><button class = "btn btn-primary" ng-click="updateContact()" >Update</button></td>
+				</form>
 				<td><button class = "btn btn-primary" ng-click="clearContact()" >Clear</button></td>
 			</tr>
 			<tr ng-repeat = "c in contactList">
@@ -37,4 +48,7 @@
 	</div>
 <script src="controllers/controller.js"></script>
 </body>
+<footer>
+	
+</footer>
 </html>
